@@ -10,7 +10,7 @@ module Backup
 
       ##
       # Rackspace Cloud Files Credentials
-      attr_accessor :username, :api_key, :auth_url
+      attr_accessor :username, :api_key, :auth_url, :persistent, :cdn_ssl
 
       ##
       # Rackspace Service Net
@@ -28,6 +28,8 @@ module Backup
 
         @servicenet ||= false
         @path       ||= 'backups'
+        @cdn_ssl    ||= false
+        @persistent ||= false
 
         instance_eval(&block) if block_given?
       end
@@ -48,7 +50,9 @@ module Backup
           :rackspace_username   => username,
           :rackspace_api_key    => api_key,
           :rackspace_auth_url   => auth_url,
-          :rackspace_servicenet => servicenet
+          :rackspace_servicenet => servicenet,
+          :persistent           => persistent,
+          :rackspace_cdn_ssl    => cdn_ssl
         )
       end
 
